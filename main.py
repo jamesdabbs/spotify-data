@@ -31,6 +31,12 @@ spotify = james
 
 recent = spotify.current_user_top_tracks(limit=50)
 
+song_ids = []
+for item in recent['items']:
+  song_ids.append(item['id'])
+
+audio_info = spotify.audio_features(song_ids)
+
 # import pdb; pdb.set_trace() - start interactive session on a line
 # type(object) - what kind of thing is object?
 # dir(object) - what methods does this object have?
@@ -45,12 +51,12 @@ recent = spotify.current_user_top_tracks(limit=50)
 #   item = recent['items'][index]
 #   print(item['name'])
 
-for item in recent['items']:
-  print(item['id'])
-  print(item['name'])
-  print(item['album']['name'])
-  print(item['artists'][0]['name'])
-  print('')
+# for item in recent['items']:
+#   print(item['id'])
+#   print(item['name'])
+#   print(item['album']['name'])
+#   print(item['artists'][0]['name'])
+#   print('')
 
 # with open('test.csv', 'w') as csvfile:
 #   writer = csv.writer(csvfile)
@@ -58,14 +64,31 @@ for item in recent['items']:
 #   writer.writerow([1,2,3])
 #   writer.writerow([4,5,'a,b,c'])
 
+# import pdb; pdb.set_trace()
+
+danceability_lookup = {} # keys = ids => values = danceability
+for info in audio_info:
+  key = info['id']
+  danceability_lookup[key] = info['danceability']
+
 with open('songs.csv', 'w') as songfile:
   writer = csv.writer(songfile)
-  writer.writerow(['ID', 'Name', 'Album', 'Artist'])
+  writer.writerow([
+    'ID',
+    'Name',
+    'Album',
+    'Artist',
+    'Danceability'
+  ])
 
   for item in recent['items']:
+    item_id = item['id']
+    danceability = danceability_lookup[item_id]
+
     writer.writerow([
-      item['id'],
+      item_id,
       item['name'],
       item['album']['name'],
-      item['artists'][0]['name']
+      item['artists'][0]['name'],
+      danceability
     ])
