@@ -66,10 +66,10 @@ audio_info = spotify.audio_features(song_ids)
 
 # import pdb; pdb.set_trace()
 
-danceability_lookup = {} # keys = ids => values = danceability
+audio_lookup = {} # keys = ids => values = danceability
 for info in audio_info:
   key = info['id']
-  danceability_lookup[key] = info['danceability']
+  audio_lookup[key] = info
 
 with open('songs.csv', 'w') as songfile:
   writer = csv.writer(songfile)
@@ -78,17 +78,23 @@ with open('songs.csv', 'w') as songfile:
     'Name',
     'Album',
     'Artist',
-    'Danceability'
+    'Danceability',
+    'Energy',
+    'Key',
+    'Loudness'
   ])
 
   for item in recent['items']:
     item_id = item['id']
-    danceability = danceability_lookup[item_id]
+    info = audio_lookup[item_id]
 
     writer.writerow([
       item_id,
       item['name'],
       item['album']['name'],
       item['artists'][0]['name'],
-      danceability
+      info['danceability'],
+      info['energy'],
+      info['key'],
+      info['loudness']
     ])
