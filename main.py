@@ -1,8 +1,8 @@
 import csv
 import spotipy
 
-james_token  = 'BQAfvOZXfqbMPV42FfQD5-MeA6l5Iwp2YJhzhxcuBrrbgMNl13mJyPRzHNeq3yVwEwp0UPtPD03tij7qfWSGZ7dwQ65UIIWEJlkvnwtkbKPNV2Y-NhXJEYDI99Bv-vvr5QZqVj8XwXZVPas_3hl28JNyMbDGOIcehXW8yoFc-kpVTERC3q1ZTqJrddRqWKesam1LfPS_Yn49wNUDOAr-RSVNP3l7c72pt670tEwKXTRb2yINeERN27mgHwLpKib-MHwPKK85GA07xkUy'
-rachel_token = 'BQCduiTwaui24W6um23ZCwjvou7NVe1Vjr23u4DcG7cZVjhyWtxYyTyuTc2KjHoXRgNx7WRT0iSzCZKii89IGt9ZCswZVObSxSxNVZzvgcptrCWrI-HRkXciqru4Y0upJtNArAsD7gUyKwvSCkwStqWN0Y8RnuA7cMwHR9BSnQ7lMt5DzZ-3ey4734SEWKPtzX-7BUxMWA'
+james_token  = '... redacted and expired ...'
+rachel_token = '... redacted and expired ...'
 
 james  = spotipy.Spotify(auth=james_token)
 rachel = spotipy.Spotify(auth=rachel_token)
